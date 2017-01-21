@@ -1,5 +1,6 @@
 package com.example.xiao.musicnow.HomePage;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,15 +14,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.xiao.musicnow.HomePage.Fragments.VideoFragment;
 import com.example.xiao.musicnow.R;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static ProgressDialog pDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        initDrawer();
+        initContainer();
+
+    }
+
+    private void initDrawer(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,6 +56,12 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+    private void initContainer(){
+        if(findViewById(R.id.video_fragment_container) != null) {
+            VideoFragment homeFragment = new VideoFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.video_fragment_container, homeFragment).commit();
+        }
     }
 
     @Override
@@ -99,5 +119,18 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+    public static void showPDialog(){
+        if (!pDialog.isShowing()){
+            pDialog.show();
+        }
+    }
+    public static void disPDialog(){
+        if (pDialog.isShowing()){
+            pDialog.dismiss();
+        }
     }
 }
