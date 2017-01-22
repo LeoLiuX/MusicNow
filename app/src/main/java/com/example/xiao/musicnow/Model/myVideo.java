@@ -13,6 +13,8 @@ public class myVideo {
     private String videoImageUrl;
     private Bitmap videoImage;
     private String videoUrl;
+    private boolean favorited;
+    private boolean downloaded;
 
     public myVideo(){}
 
@@ -22,6 +24,8 @@ public class myVideo {
         this.videoDescription = desc;
         this.videoImageUrl = image;
         this.videoUrl = video;
+        favorited = false;
+        downloaded = false;
     }
 
     public void setImage(Bitmap image){
@@ -41,6 +45,26 @@ public class myVideo {
     }
     public void setVideoUrl (String url){
         this. videoUrl = url;
+    }
+
+    public void setFavorited(){
+        favorited = true;
+    }
+    public void removeFavorited(){
+        favorited = false;
+    }
+    public boolean getFavorite(){
+        return favorited;
+    }
+
+    public void setDownloaded(){
+        downloaded = true;
+    }
+    public void removeDownloaded(){
+        downloaded = false;
+    }
+    public boolean getDownload(){
+        return downloaded;
     }
 
     public int getId(){

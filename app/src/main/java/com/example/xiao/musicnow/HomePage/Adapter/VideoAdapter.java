@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.xiao.musicnow.HomePage.Fragments.video_favorite;
 import com.example.xiao.musicnow.Model.myVideo;
 import com.example.xiao.musicnow.R;
 
@@ -37,23 +38,30 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
     }
 
     @Override
-    public void onBindViewHolder(final VideoHolder holder, int position) {
+    public void onBindViewHolder(final VideoHolder holder, final int position) {
         holder.mTextName.setText(videos.get(position).getName());
         holder.mTextDescription.setText(videos.get(position).getDescription());
         holder.mImageView.setImageBitmap(videos.get(position).getImage());
         holder.itemView.setTag(videos.get(position).getId());
-        holder.favorite_Flag = false;
+        if (!videos.get(position).getFavorite()){
+            holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
+        }
+        else {
+            holder.mFavoriteBtn.setImageResource(R.drawable.favorite_on);
+        }
 
         holder.mFavoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.favorite_Flag){
+                if (videos.get(position).getFavorite()){
+                    videos.get(position).removeFavorited();
                     holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
-                    holder.favorite_Flag = false;
+                    video_favorite.refreshFavorite();
                 }
                 else {
+                    videos.get(position).setFavorited();
                     holder.mFavoriteBtn.setImageResource(R.drawable.favorite_on);
-                    holder.favorite_Flag = true;
+                    video_favorite.refreshFavorite();
                 }
             }
         });
@@ -95,7 +103,6 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
 class VideoHolder extends RecyclerView.ViewHolder {
     ImageView mImageView, mFavoriteBtn;
     TextView mTextId, mTextName, mTextDescription;
-    boolean favorite_Flag;
 
     public VideoHolder(View itemView) {
         super(itemView);

@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 
 public class video_main extends Fragment {
-    ArrayList<myVideo> videos = new ArrayList<>();
+    static ArrayList<myVideo> videos = new ArrayList<>();
     private final String URL_VIDEO = "http://rjtmobile.com/ansari/rjt_music/music_app/video_list.php?";
     private final String TAG = "VIDEO_MAIN";
     private RecyclerView mRecyclerView;
@@ -49,6 +49,10 @@ public class video_main extends Fragment {
     private View view;
     public video_main() {
         // Required empty public constructor
+    }
+
+    public static ArrayList<myVideo> getVideoList(){
+        return videos;
     }
 
     @Override
