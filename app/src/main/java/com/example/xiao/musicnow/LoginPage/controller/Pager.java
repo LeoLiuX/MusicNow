@@ -1,4 +1,4 @@
-package com.example.xiao.musicnow.LoginPage;
+package com.example.xiao.musicnow.LoginPage.controller;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

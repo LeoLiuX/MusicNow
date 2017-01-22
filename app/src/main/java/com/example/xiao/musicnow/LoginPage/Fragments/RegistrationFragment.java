@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.xiao.musicnow.Controller.AppController;
-import com.example.xiao.musicnow.LoginPage.PasswordValidator;
+import com.example.xiao.musicnow.LoginPage.controller.PasswordValidator;
 import com.example.xiao.musicnow.R;
 
 /**
