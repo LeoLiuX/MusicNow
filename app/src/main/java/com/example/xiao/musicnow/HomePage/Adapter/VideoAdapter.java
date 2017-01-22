@@ -42,7 +42,7 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
         holder.mTextName.setText(videos.get(position).getName());
         holder.mTextDescription.setText(videos.get(position).getDescription());
         holder.mImageView.setImageBitmap(videos.get(position).getImage());
-        holder.itemView.setTag(videos.get(position).getId());
+        holder.itemView.setTag(position);
         if (!videos.get(position).getFavorite()){
             holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
         }
@@ -74,7 +74,7 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
     }
 
     public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view , String data);
+        void onItemClick(View view , int position);
     }
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
@@ -85,7 +85,7 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
     @Override
     public void onClick(View view) {
         if (mOnItemClickListener != null) {
-            mOnItemClickListener.onItemClick(view,String.valueOf(view.getTag()));
+            mOnItemClickListener.onItemClick(view, (Integer) view.getTag());
         }
         else{
             Log.e("CLICK", "ERROR");

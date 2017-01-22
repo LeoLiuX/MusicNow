@@ -1,12 +1,15 @@
 package com.example.xiao.musicnow.HomePage.Fragments;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -67,6 +70,21 @@ public class video_main extends Fragment {
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new VideoAdapter(getActivity(), videos);
+        adapter.setOnItemClickListener(new VideoAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("VIDEO_URL", videos.get(position).getVideoUrl());
+                Fragment detail = new video_detail();
+                detail.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, detail)
+                        .addToBackStack(video_main.class.getName())
+                        .commit();
+            }
+        });
         mRecyclerView.setAdapter(adapter);
         return view;
     }

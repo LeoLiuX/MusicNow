@@ -58,9 +58,9 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
     private void initContainer(){
-        if(findViewById(R.id.video_fragment_container) != null) {
+        if(findViewById(R.id.home_fragment_container) != null) {
             VideoFragment homeFragment = new VideoFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.video_fragment_container, homeFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container, homeFragment).commit();
         }
     }
 
