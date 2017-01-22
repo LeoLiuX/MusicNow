@@ -37,11 +37,26 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
     }
 
     @Override
-    public void onBindViewHolder(VideoHolder holder, int position) {
+    public void onBindViewHolder(final VideoHolder holder, int position) {
         holder.mTextName.setText(videos.get(position).getName());
         holder.mTextDescription.setText(videos.get(position).getDescription());
         holder.mImageView.setImageBitmap(videos.get(position).getImage());
         holder.itemView.setTag(videos.get(position).getId());
+        holder.favorite_Flag = false;
+
+        holder.mFavoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.favorite_Flag){
+                    holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
+                    holder.favorite_Flag = false;
+                }
+                else {
+                    holder.mFavoriteBtn.setImageResource(R.drawable.favorite_on);
+                    holder.favorite_Flag = true;
+                }
+            }
+        });
 
     }
 
@@ -80,6 +95,7 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
 class VideoHolder extends RecyclerView.ViewHolder {
     ImageView mImageView, mFavoriteBtn;
     TextView mTextId, mTextName, mTextDescription;
+    boolean favorite_Flag;
 
     public VideoHolder(View itemView) {
         super(itemView);
@@ -88,6 +104,5 @@ class VideoHolder extends RecyclerView.ViewHolder {
         mTextName = (TextView) itemView.findViewById(R.id.video_main_name);
         mTextDescription = (TextView) itemView.findViewById(R.id.video_main_description);
         mFavoriteBtn = (ImageView) itemView.findViewById(R.id.video_main_favorite);
-
     }
 }

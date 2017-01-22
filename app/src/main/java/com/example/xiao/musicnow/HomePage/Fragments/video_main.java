@@ -1,6 +1,10 @@
 package com.example.xiao.musicnow.HomePage.Fragments;
 
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +31,7 @@ import com.example.xiao.musicnow.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -87,6 +92,10 @@ public class video_main extends Fragment {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.e(TAG, "Image Load Error: " + error.getMessage());
+                                Resources res = getActivity().getResources();
+                                Bitmap bmp = BitmapFactory.decodeResource(res, R.drawable.video_default_image);
+                                curVideo.setImage(bmp);
+                                adapter.notifyData(videos);
                             }
 
                             @Override
