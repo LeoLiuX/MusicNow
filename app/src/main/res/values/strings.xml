@@ -6,4 +6,28 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--Login Fragment -->
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_password">Password</string>
+    <string name="button_signIn">Sign In</string>
+    <string name="button_reset">Want to Reset Password?</string>
+
+    <!--Facebook Login -->
+    <string name="facebook_app_id">1396998250339202</string>
+    <string name="fb_login_protocol_scheme">fb1396998250339202</string>
+
+    <!--Reset Fragment -->
+    <string name="title_reset">Reset Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="old_password">Provisional Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm New Password</string>
+    <string name="button_submit">Submit</string>
+
+    <!--Registration Fragment -->
+    <string name="hint_name">User Name</string>
+    <string name="hint_email">Email Address</string>
+    <string name="button_register">Register</string>
+
 </resources>
