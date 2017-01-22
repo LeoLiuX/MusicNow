@@ -86,8 +86,8 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(loginActivity);
+                Intent homeActivity = new Intent(SplashActivity.this, HomeActivity.class);
+                startActivity(homeActivity);
             }
         });
     }
