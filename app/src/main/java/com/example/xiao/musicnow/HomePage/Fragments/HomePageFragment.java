@@ -8,7 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,27 +23,17 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.xiao.musicnow.Controller.AppController;
-import com.example.xiao.musicnow.HomePage.Adapter.VideoAdapter;
 import com.example.xiao.musicnow.HomePage.HomeActivity;
+import com.example.xiao.musicnow.Model.ClickImageView;
 import com.example.xiao.musicnow.Model.myPicture;
-import com.example.xiao.musicnow.Model.myVideo;
 import com.example.xiao.musicnow.R;
-
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -58,6 +47,8 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
     private final String URL_PIC = "http://rjtmobile.com/ansari/rjt_music/music_app/pics_list.php?";
     private final String TAG = "HOME";
 
+    private ClickImageView btn_music, btn_video, btn_pic, btn_offline, btn_zone;
+
     private ViewPager viewPager;
     private ImageView[] tips;
     private ImageView[] mImageViews;
@@ -67,9 +58,14 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        initIconBtn();
         if (pictures.isEmpty()){
             requestData();
         }
+        else {
+            initImages(pictures.size());
+        }
+
 
         return view;
     }
@@ -169,7 +165,79 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
         viewPager.setOnPageChangeListener(this);
         viewPager.setCurrentItem((mImageViews.length) * 100);
     }
+    private void initIconBtn(){
+        btn_music = (ClickImageView) view.findViewById(R.id.home_btn_music);
+        btn_video = (ClickImageView) view.findViewById(R.id.home_btn_video);
+        btn_pic = (ClickImageView) view.findViewById(R.id.home_btn_picture);
+        btn_offline = (ClickImageView) view.findViewById(R.id.home_btn_download);
+        btn_zone = (ClickImageView) view.findViewById(R.id.home_btn_myzone);
 
+        btn_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MusicFragment musicFragment = new MusicFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, musicFragment)
+                        .addToBackStack(HomePageFragment.class.getName())
+                        .commit();
+        }
+        });
+
+        btn_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VideoFragment videoFragment = new VideoFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, videoFragment)
+                        .addToBackStack(HomePageFragment.class.getName())
+                        .commit();
+            }
+        });
+
+        btn_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PictureFragment pictureFragment = new PictureFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, pictureFragment)
+                        .addToBackStack(HomePageFragment.class.getName())
+                        .commit();
+            }
+        });
+
+        btn_offline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OfflineFragment offlineFragment = new OfflineFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, offlineFragment)
+                        .addToBackStack(HomePageFragment.class.getName())
+                        .commit();
+            }
+        });
+
+        btn_zone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("CLICK", "BTN_5");
+                MyZoneFragment myZoneFragment = new MyZoneFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, myZoneFragment)
+                        .addToBackStack(HomePageFragment.class.getName())
+                        .commit();
+            }
+        });
+    }
 
     public class ImageAdapter extends PagerAdapter{
         @Override

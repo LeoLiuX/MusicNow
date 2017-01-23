@@ -38,8 +38,9 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         pDialog = new ProgressDialog(this);
-        pDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        pDialog.setContentView(R.layout.progress_loading);
+//        pDialog.setMessage("Loading...");
+//        pDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        pDialog.setContentView(R.layout.progress_loading);
         pDialog.setCancelable(false);
         initDrawer();
         initContainer();
@@ -156,6 +157,7 @@ public class HomeActivity extends AppCompatActivity
     public static void showPDialog(){
         if (!pDialog.isShowing()){
             pDialog.show();
+            pDialog.setContentView(R.layout.progress_loading);
         }
     }
     public static void disPDialog(){

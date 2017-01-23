@@ -47,12 +47,17 @@ public class video_main extends Fragment {
     private final String URL_VIDEO = "http://rjtmobile.com/ansari/rjt_music/music_app/video_list.php?";
     private final String TAG = "VIDEO_MAIN";
     private RecyclerView mRecyclerView;
-    private VideoAdapter adapter;
+    private static VideoAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private View view;
     public video_main() {
         // Required empty public constructor
     }
+
+    public static void refreshFavorite(){
+        adapter.notifyData(videos);
+    }
+
 
     public static ArrayList<myVideo> getVideoList(){
         return videos;

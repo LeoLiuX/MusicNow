@@ -44,8 +44,10 @@
             android:layout_alignParentStart="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/video_main_favorite"
             android:src="@drawable/favorite_off"
             android:layout_alignBottom="@+id/video_main_image"

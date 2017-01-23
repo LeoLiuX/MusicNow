@@ -1,83 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/home_viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:id="@+id/layout">
-
-        <LinearLayout
-            android:id="@+id/home_viewGroup"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/home_viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
-        </LinearLayout>
+            android:layout_height="200dp" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical" >
 
-    <RelativeLayout
+            <LinearLayout
+                android:id="@+id/home_viewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
-        android:layout_gravity="bottom">
+        android:layout_height="wrap_content"
+        android:src="@drawable/divide_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:id="@+id/linear_first_line"
+        android:layout_marginTop="30dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp">
+            <com.example.xiao.musicnow.Model.ClickImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/music_icon"
+                android:id="@+id/home_btn_music"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_btn_music"
+                android:text="Music"
+                android:layout_alignEnd="@+id/home_btn_music"
+                android:layout_alignParentStart="true"
+                android:gravity="center"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/nav_video"
-            android:layout_marginTop="39dp"
-            android:id="@+id/button_video"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp">
+            <com.example.xiao.musicnow.Model.ClickImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/video_icon"
+                android:id="@+id/home_btn_video"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_btn_video"
+                android:text="Video"
+                android:gravity="center"
+                android:layout_alignEnd="@+id/home_btn_video"
+                android:layout_alignStart="@+id/home_btn_video"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/nav_music"
-            android:id="@+id/button_music"
-            android:layout_marginStart="34dp"
-            android:layout_alignTop="@+id/button_video"
-            android:layout_alignParentStart="true" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.example.xiao.musicnow.Model.ClickImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/picture_icon"
+                android:id="@+id/home_btn_picture"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_btn_picture"
+                android:text="Picture"
+                android:gravity="center"
+                android:layout_alignEnd="@+id/home_btn_picture"
+                android:layout_alignStart="@+id/home_btn_picture"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/nav_pic"
-            android:id="@+id/button_pic"
-            android:layout_marginEnd="26dp"
-            android:layout_alignTop="@+id/button_video"
-            android:layout_alignParentEnd="true" />
+    </LinearLayout>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/nav_my_zone"
-            android:id="@+id/button_myZone"
-            android:layout_alignTop="@+id/button_offline"
-            android:layout_toEndOf="@+id/button_video" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp">
+            <com.example.xiao.musicnow.Model.ClickImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/download_icon"
+                android:id="@+id/home_btn_download"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_btn_download"
+                android:text="Offline"
+                android:layout_alignEnd="@+id/home_btn_download"
+                android:layout_alignParentStart="true"
+                android:gravity="center"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/nav_offline"
-            android:layout_marginTop="55dp"
-            android:id="@+id/button_offline"
-            android:layout_below="@+id/button_video"
-            android:layout_alignStart="@+id/button_music"
-            android:layout_marginStart="49dp" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp">
+            <com.example.xiao.musicnow.Model.ClickImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/myzone_icon"
+                android:id="@+id/home_btn_myzone"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_btn_myzone"
+                android:text="My Zone"
+                android:gravity="center"
+                android:layout_alignEnd="@+id/home_btn_myzone"
+                android:layout_alignStart="@+id/home_btn_myzone"/>
+        </RelativeLayout>
 
-</FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
