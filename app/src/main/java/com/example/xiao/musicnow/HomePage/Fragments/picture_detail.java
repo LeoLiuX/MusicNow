@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.xiao.musicnow.Model.ClickImageView;
 import com.example.xiao.musicnow.Model.myPicture;
 import com.example.xiao.musicnow.R;
 
@@ -28,6 +29,7 @@ public class picture_detail extends Fragment {
     Bitmap image;
     ImageView imageView;
     TextView textTitle, textDesc;
+    ClickImageView downloadBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,9 +49,20 @@ public class picture_detail extends Fragment {
         imageView = (ImageView) v.findViewById(R.id.picture_detail_imageview);
         textTitle = (TextView) v.findViewById(R.id.picture_detail_title);
         textDesc = (TextView) v.findViewById(R.id.picture_detail_desc);
+        downloadBtn = (ClickImageView) v.findViewById(R.id.picture_detail_download);
         imageView.setImageBitmap(image);
         textTitle.setText(title);
         textDesc.setText(desc);
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadPicture();
+            }
+        });
         return v;
+    }
+
+    private void downloadPicture() {
+        // download image
     }
 }

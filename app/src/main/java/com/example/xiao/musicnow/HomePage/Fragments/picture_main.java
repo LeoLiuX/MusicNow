@@ -35,7 +35,7 @@ public class picture_main extends Fragment {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PictureAdapter(getActivity(), pictures);
-        adapter.setOnItemClickListener(new VideoAdapter.OnRecyclerViewItemClickListener() {
+        adapter.setOnItemClickListener(new PictureAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
