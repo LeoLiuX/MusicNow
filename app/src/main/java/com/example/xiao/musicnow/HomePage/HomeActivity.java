@@ -1,9 +1,11 @@
 package com.example.xiao.musicnow.HomePage;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,10 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.Toast;
 
 import com.example.xiao.musicnow.HomePage.Fragments.HomePageFragment;
+import com.example.xiao.musicnow.HomePage.Fragments.MusicFragment;
+import com.example.xiao.musicnow.HomePage.Fragments.MyZoneFragment;
+import com.example.xiao.musicnow.HomePage.Fragments.OfflineFragment;
+import com.example.xiao.musicnow.HomePage.Fragments.PictureFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.VideoFragment;
 import com.example.xiao.musicnow.R;
+import com.google.android.gms.common.api.Api;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,7 +38,8 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
+        pDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        pDialog.setContentView(R.layout.progress_loading);
         pDialog.setCancelable(false);
         initDrawer();
         initContainer();
@@ -39,7 +49,7 @@ public class HomeActivity extends AppCompatActivity
     private void initDrawer(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        // floating button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +58,7 @@ public class HomeActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        // navigation drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -90,7 +100,12 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if(id == R.id.action_search){
+            Toast.makeText(this, "Search function is selected", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         if (id == R.id.action_settings) {
+            Toast.makeText(this, "Settings function is selected", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -102,19 +117,33 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        Fragment homeFragment = null;
+        String title = "";
+        if (id == R.id.nav_home) {
+            homeFragment = new HomePageFragment();
+            title = "Home";
+        } else if (id == R.id.nav_music) {
+            homeFragment = new MusicFragment();
+            title = "Music";
+        } else if (id == R.id.nav_video) {
+            homeFragment = new VideoFragment();
+            title = "Video";
+        } else if (id == R.id.nav_pic) {
+            homeFragment = new PictureFragment();
+            title = "Picture";
+        } else if (id == R.id.nav_offline) {
+            homeFragment = new OfflineFragment();
+            title = "Download";
+        } else if (id == R.id.nav_my_zone) {
+            homeFragment = new MyZoneFragment();
+            title = "My Zone";
+        } else if (id == R.id.nav_logout) {
+            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+        }
+        if(homeFragment != null)
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container, homeFragment).commit();
+            getSupportActionBar().setTitle(title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -12,7 +13,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/layout">
 
         <LinearLayout
             android:id="@+id/home_viewGroup"
@@ -23,12 +25,59 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal" >
         </LinearLayout>
+
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="bottom">
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/nav_video"
+            android:layout_marginTop="39dp"
+            android:id="@+id/button_video"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/nav_music"
+            android:id="@+id/button_music"
+            android:layout_marginStart="34dp"
+            android:layout_alignTop="@+id/button_video"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/nav_pic"
+            android:id="@+id/button_pic"
+            android:layout_marginEnd="26dp"
+            android:layout_alignTop="@+id/button_video"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/nav_my_zone"
+            android:id="@+id/button_myZone"
+            android:layout_alignTop="@+id/button_offline"
+            android:layout_toEndOf="@+id/button_video" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/nav_offline"
+            android:layout_marginTop="55dp"
+            android:id="@+id/button_offline"
+            android:layout_below="@+id/button_video"
+            android:layout_alignStart="@+id/button_music"
+            android:layout_marginStart="49dp" />
+    </RelativeLayout>
 
 </FrameLayout>
