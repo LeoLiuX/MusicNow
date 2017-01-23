@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.Fragments.picture_favorite;
 import com.example.xiao.musicnow.HomePage.Fragments.picture_main;
+import com.example.xiao.musicnow.HomePage.HomeActivity;
 import com.example.xiao.musicnow.Model.myPicture;
 import com.example.xiao.musicnow.R;
 
@@ -55,19 +57,24 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureHolder> implemen
         holder.favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(picture.get(position).getFavorite()) {
-                    // dislike
-                    picture.get(position).removeFavorited();
-                    holder.favBtn.setImageResource(R.drawable.favorite_off);
-                    picture_favorite.refreshFavorite();
-                    picture_main.refreshFavorite();
+                if (!SPController.getInstance(context).hasUserLoggedIn()){
+                    HomeActivity.showLoginAlert();
                 }
                 else {
-                    // like
-                    picture.get(position).setFavorited();
-                    holder.favBtn.setImageResource(R.drawable.favorite_on);
-                    picture_favorite.refreshFavorite();
-                    picture_main.refreshFavorite();
+                    if(picture.get(position).getFavorite()) {
+                        // dislike
+                        picture.get(position).removeFavorited();
+                        holder.favBtn.setImageResource(R.drawable.favorite_off);
+                        picture_favorite.refreshFavorite();
+                        picture_main.refreshFavorite();
+                    }
+                    else {
+                        // like
+                        picture.get(position).setFavorited();
+                        holder.favBtn.setImageResource(R.drawable.favorite_on);
+                        picture_favorite.refreshFavorite();
+                        picture_main.refreshFavorite();
+                    }
                 }
             }
         });
@@ -82,9 +89,9 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureHolder> implemen
         void onItemClick(View view , int position);
     }
 
-    private VideoAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    private PictureAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public void setOnItemClickListener(VideoAdapter.OnRecyclerViewItemClickListener listener) {
+    public void setOnItemClickListener(PictureAdapter.OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
     @Override
