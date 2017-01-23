@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.xiao.musicnow.HomePage.Fragments.HomePageFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.VideoFragment;
 import com.example.xiao.musicnow.R;
 
@@ -59,7 +60,7 @@ public class HomeActivity extends AppCompatActivity
     }
     private void initContainer(){
         if(findViewById(R.id.home_fragment_container) != null) {
-            VideoFragment homeFragment = new VideoFragment();
+            HomePageFragment homeFragment = new HomePageFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container, homeFragment).commit();
         }
     }
