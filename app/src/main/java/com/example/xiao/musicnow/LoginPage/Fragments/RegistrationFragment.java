@@ -2,6 +2,7 @@ package com.example.xiao.musicnow.LoginPage.Fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.xiao.musicnow.Controller.AppController;
+import com.example.xiao.musicnow.LoginPage.LoginActivity;
 import com.example.xiao.musicnow.LoginPage.PasswordValidator;
 import com.example.xiao.musicnow.R;
 
@@ -103,11 +105,9 @@ public class RegistrationFragment extends Fragment{
                 Log.d(TAG, response);
                 if(response.equals("successfully registered"))
                 {
-                    // go back to Login Fragment
-                    LoginFragment fragment = new LoginFragment();
-                    FragmentManager fm=getFragmentManager();
-                    FragmentTransaction ft=fm.beginTransaction();
-                    ft.replace(R.id.pager,fragment).commit();
+                    // go back to Login Activity
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                 }
                 else
                 {
