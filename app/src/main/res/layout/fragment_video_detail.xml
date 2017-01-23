@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <SurfaceView
-        android:id="@+id/video_detail_surfaceview"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
-
-    <SeekBar
-        android:id="@+id/video_detail_seekbar"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/video_detail_poster"
+            android:background="@color/black_overlay"/>
+        <com.example.xiao.musicnow.Model.ClickImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_play"
+            android:layout_gravity="center"
+            android:id="@+id/video_detail_play"/>
+    </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/video_detail_play"
-            android:text="Play"/>
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pause"
-            android:id="@+id/video_detail_pause"/>
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop"
-            android:id="@+id/video_detail_stop"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/video_detail_title"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false" />
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:id="@+id/video_detail_desc"
+        android:textSize="18sp"
+        android:textAllCaps="false" />
 
 </LinearLayout>

@@ -55,6 +55,21 @@ public class video_favorite extends Fragment {
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new VideoAdapter(getActivity(), favoriteList);
+        adapter.setOnItemClickListener(new VideoAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("VIDEO_ID", favoriteList.get(position).getId());
+                Fragment detail = new video_detail();
+                detail.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, detail)
+                        .addToBackStack(video_main.class.getName())
+                        .commit();
+            }
+        });
         mRecyclerView.setAdapter(adapter);
         return view;
     }

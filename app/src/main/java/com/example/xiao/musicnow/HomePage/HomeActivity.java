@@ -1,6 +1,7 @@
 package com.example.xiao.musicnow.HomePage;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static ProgressDialog pDialog;
+    private static ProgressDialog mDownloadingDialog;
 
 
     @Override
@@ -38,10 +40,14 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         pDialog = new ProgressDialog(this);
-//        pDialog.setMessage("Loading...");
-//        pDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        pDialog.setContentView(R.layout.progress_loading);
         pDialog.setCancelable(false);
+
+        mDownloadingDialog = new ProgressDialog(this);
+        mDownloadingDialog.setMessage("Loading");
+        mDownloadingDialog.setIndeterminate(true);
+        mDownloadingDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mDownloadingDialog.setCancelable(false);
+
         initDrawer();
         initContainer();
 
@@ -164,5 +170,20 @@ public class HomeActivity extends AppCompatActivity
         if (pDialog.isShowing()){
             pDialog.dismiss();
         }
+    }
+
+    public static void showmDownloadingDialog(){
+        if (!mDownloadingDialog.isShowing()){
+            mDownloadingDialog.show();
+        }
+    }
+    public static void dismDownloadingDialog(){
+        if (mDownloadingDialog.isShowing()){
+            mDownloadingDialog.dismiss();
+        }
+    }
+
+    public static ProgressDialog getmDownloadingDialog(){
+        return mDownloadingDialog;
     }
 }

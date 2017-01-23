@@ -79,7 +79,7 @@ public class video_main extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putString("VIDEO_URL", videos.get(position).getVideoUrl());
+                bundle.putInt("VIDEO_ID", videos.get(position).getId());
                 Fragment detail = new video_detail();
                 detail.setArguments(bundle);
                 getActivity().getSupportFragmentManager()
