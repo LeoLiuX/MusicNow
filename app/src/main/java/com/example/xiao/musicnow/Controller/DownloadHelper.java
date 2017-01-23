@@ -22,8 +22,10 @@ public class DownloadHelper extends AsyncTask<String, Integer, String> {
 
     private Context context;
     private PowerManager.WakeLock mWakeLock;
+    private String FILE_NAME;
     private Object lock;
-    public DownloadHelper(Context context, Object lock) {
+    public DownloadHelper(Context context, Object lock, String filename) {
+        this.FILE_NAME = filename;
         this.context = context;
         this.lock = lock;
     }
@@ -43,7 +45,7 @@ public class DownloadHelper extends AsyncTask<String, Integer, String> {
             }
             int fileLength = connection.getContentLength();
             input = connection.getInputStream();
-            output = new FileOutputStream("/sdcard/video.mp4");
+            output = new FileOutputStream("/sdcard/" + FILE_NAME);
             byte data[] = new byte[4096];
             long total = 0;
             int count;
@@ -96,9 +98,11 @@ public class DownloadHelper extends AsyncTask<String, Integer, String> {
         if (result != null)
             Toast.makeText(context,"Download error: "+result, Toast.LENGTH_LONG).show();
         else{
-            Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
-            synchronized (lock){
-                lock.notify();
+            Toast.makeText(context,"File " + FILE_NAME + " downloaded", Toast.LENGTH_SHORT).show();
+            if (lock != null){
+                synchronized (lock){
+                    lock.notify();
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.xiao.musicnow.Controller.DownloadHelper;
 import com.example.xiao.musicnow.HomePage.HomeActivity;
@@ -33,6 +34,9 @@ public class video_detail extends Fragment {
     private ClickImageView btn_play;
     private TextView tv_title, tv_desc;
 
+    ClickImageView downloadBtn;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_video_detail, container, false);
@@ -52,6 +56,8 @@ public class video_detail extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        File file = new File("/sdcard/TmpFile");
+        file.delete();
     }
 
     private void init(){
@@ -63,10 +69,21 @@ public class video_detail extends Fragment {
         tv_title.setText(video.getName());
         tv_desc.setText(video.getDescription());
 
+        downloadBtn = (ClickImageView) view.findViewById(R.id.video_detail_download);
+        if (video.getDownload()){
+            downloadBtn.setAlpha(100);
+        }
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadVideo();
+            }
+        });
+
         btn_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadVideo();
+                downloadTmpVideo();
                 new Thread(){
                     @Override
                     public void run() {
@@ -74,7 +91,7 @@ public class video_detail extends Fragment {
                         try {
                             synchronized (lock){
                                 lock.wait();
-                                File file = new File("/sdcard/video.mp4");
+                                File file = new File("/sdcard/TmpFile");
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 intent.setDataAndType(Uri.fromFile(file), "video/*");
                                 startActivity(intent);
@@ -90,8 +107,8 @@ public class video_detail extends Fragment {
 
     private Object lock = new Object();
 
-    private void downloadVideo(){
-        final DownloadHelper downloadTask = new DownloadHelper(getActivity(), lock);
+    private void downloadTmpVideo(){
+        final DownloadHelper downloadTask = new DownloadHelper(getActivity(), lock, "TmpFile");
         final String videoUrl = video.getVideoUrl();
         Log.e("DOWNLOAD",videoUrl);
         StringBuilder sb = new StringBuilder();
@@ -110,7 +127,26 @@ public class video_detail extends Fragment {
             }
         });
         downloadTask.execute(sb.toString());
+    }
 
-
+    private void downloadVideo() {
+        if (video.getDownload()){
+            Toast.makeText(getActivity(), "Picture Already Been Downloaded!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // download image
+        video.setDownloaded();
+        final DownloadHelper downloadTask = new DownloadHelper(getActivity(), null, video.getName());
+        final String videoUrl = video.getVideoUrl();
+        Log.e("DOWNLOAD",videoUrl);
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<videoUrl.length(); i++){
+            if (videoUrl.charAt(i) == ' '){
+                sb.append("%20");
+            }else {
+                sb.append(videoUrl.charAt(i));
+            }
+        }
+        downloadTask.execute(sb.toString());
     }
 }

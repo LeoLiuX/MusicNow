@@ -1,15 +1,20 @@
 package com.example.xiao.musicnow.HomePage.Fragments;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.xiao.musicnow.Controller.DownloadHelper;
+import com.example.xiao.musicnow.HomePage.HomeActivity;
 import com.example.xiao.musicnow.Model.ClickImageView;
 import com.example.xiao.musicnow.Model.myPicture;
 import com.example.xiao.musicnow.R;
@@ -31,15 +36,18 @@ public class picture_detail extends Fragment {
     TextView textTitle, textDesc;
     ClickImageView downloadBtn;
 
+    myPicture curPic;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pictures = HomePageFragment.getPictureList();
         Bundle bundle = getArguments();
         position = bundle.getInt("position");
-        title = pictures.get(position).getTitle();
-        desc = pictures.get(position).getDescription();
-        image = pictures.get(position).getImage();
+        curPic = pictures.get(position);
+        title = curPic.getTitle();
+        desc = curPic.getDescription();
+        image = curPic.getImage();
     }
 
     @Nullable
@@ -53,6 +61,9 @@ public class picture_detail extends Fragment {
         imageView.setImageBitmap(image);
         textTitle.setText(title);
         textDesc.setText(desc);
+        if (curPic.getDownload()){
+            downloadBtn.setAlpha(100);
+        }
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +74,23 @@ public class picture_detail extends Fragment {
     }
 
     private void downloadPicture() {
+        if (curPic.getDownload()){
+            Toast.makeText(getActivity(), "Picture Already Been Downloaded!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // download image
+        curPic.setDownloaded();
+        final DownloadHelper downloadTask = new DownloadHelper(getActivity(), null, curPic.getTitle());
+        final String picUrl = curPic.getUrl();
+        Log.e("DOWNLOAD",picUrl);
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<picUrl.length(); i++){
+            if (picUrl.charAt(i) == ' '){
+                sb.append("%20");
+            }else {
+                sb.append(picUrl.charAt(i));
+            }
+        }
+        downloadTask.execute(sb.toString());
     }
 }
