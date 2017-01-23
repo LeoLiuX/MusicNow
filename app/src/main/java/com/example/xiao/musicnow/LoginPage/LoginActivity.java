@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.xiao.musicnow.LoginPage.Fragments.LoginFragment;
+import com.example.xiao.musicnow.LoginPage.controller.Pager;
 import com.example.xiao.musicnow.R;
 
 public class LoginActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{

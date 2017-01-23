@@ -1,4 +1,4 @@
-package com.example.xiao.musicnow.LoginPage;
+package com.example.xiao.musicnow.LoginPage.controller;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

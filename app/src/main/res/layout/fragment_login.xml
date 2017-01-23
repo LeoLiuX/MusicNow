@@ -2,6 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -75,15 +77,17 @@
         android:layout_below="@+id/signInBtn"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/line"
+
         android:id="@+id/imageView3"
         android:background="@android:color/transparent"
         android:layout_alignTop="@+id/reset"
         android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/line"
         android:layout_marginTop="14dp" />
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
