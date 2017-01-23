@@ -2,9 +2,21 @@
     <string name="app_name">MusicNow</string>
     <string name="title_activity_home">HomeActivity</string>
 
+    <string name="dialog_progress_loading">Loading...</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- Navigation Drawer Items-->
+    <string name="drawer_home">Home</string>
+    <string name="drawer_music">Music</string>
+    <string name="drawer_video">Video</string>
+    <string name="drawer_pic">Picture</string>
+    <string name="drawer_offline">Download</string>
+    <string name="drawer_myZone">My Zone</string>
+    <string name="drawer_logout">Log Out</string>
 
+    <!-- Options Menu-->
+    <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
 
     <!--Login Fragment -->

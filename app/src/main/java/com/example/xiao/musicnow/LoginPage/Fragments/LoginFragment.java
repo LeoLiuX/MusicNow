@@ -94,7 +94,7 @@ public class LoginFragment extends Fragment {
                 FragmentManager fm=getFragmentManager();
                 FragmentTransaction ft=fm.beginTransaction();
                 ft.addToBackStack(null);
-                ft.replace(R.id.pager,fragment).commit();
+                ft.replace(R.id.container,fragment).commit();
             }
         });
         // facebook login

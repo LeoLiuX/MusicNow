@@ -117,7 +117,7 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println(e);
+                    System.out.println(e.toString());
                 }
                 HomeActivity.disPDialog();
             }
