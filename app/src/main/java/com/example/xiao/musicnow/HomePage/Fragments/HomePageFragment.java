@@ -61,7 +61,7 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
     private ImageView[] mImageViews;
     private ImageAdapter imageAdapter;
 
-    private ArrayList<myPicture> pictures = new ArrayList<>();
+    private static ArrayList<myPicture> pictures = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -312,4 +312,7 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
         }
     }
 
+    public static ArrayList<myPicture> getPictureList(){
+        return pictures;
+    }
 }
