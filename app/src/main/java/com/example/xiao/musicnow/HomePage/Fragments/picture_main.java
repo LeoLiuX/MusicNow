@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 
 public class picture_main extends Fragment {
-    static ArrayList<myPicture> pictures;
+    static ArrayList<myPicture> pictures = new ArrayList<>();
     RecyclerView recyclerView;
     static PictureAdapter adapter;
     View view;
