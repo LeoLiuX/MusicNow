@@ -5,9 +5,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Contacts;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +24,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+
 import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.Fragments.HomePageFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.MusicFragment;
@@ -29,19 +34,31 @@ import com.example.xiao.musicnow.HomePage.Fragments.PictureFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.VideoFragment;
 import com.example.xiao.musicnow.LoginPage.LoginActivity;
 import com.example.xiao.musicnow.R;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks{
 
     private static ProgressDialog pDialog;
     private static ProgressDialog mDownloadingDialog;
     private static AlertDialog.Builder loginAlert;
+    GoogleApiClient mGoogleApiClient;
+    boolean mSignInClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_home);
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
@@ -51,6 +68,7 @@ public class HomeActivity extends AppCompatActivity
         mDownloadingDialog.setIndeterminate(true);
         mDownloadingDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDownloadingDialog.setCancelable(false);
+
 
         loginAlert = new AlertDialog.Builder(HomeActivity.this).setTitle("Please Login First").setIcon(
                 android.R.drawable.ic_dialog_info).setPositiveButton("Login", new DialogInterface.OnClickListener() {
@@ -161,6 +179,15 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             Toast.makeText(this, "User: " + SPController.getInstance(this).getMobile() + " Log out", Toast.LENGTH_SHORT).show();
             LoginManager.getInstance().logOut();
+            if (mGoogleApiClient.isConnected()) {
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status status) {
+                                Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
             SPController.getInstance(this).clearSharedPreference();
         }
         if(homeFragment != null)
@@ -174,7 +201,25 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        mGoogleApiClient.connect();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
 
     public static void showPDialog(){
         if (!pDialog.isShowing()){
@@ -205,5 +250,21 @@ public class HomeActivity extends AppCompatActivity
 
     public static void showLoginAlert(){
         loginAlert.show();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mSignInClicked = false;
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d("LOGOUT", "onConnectionFailed:" + connectionResult);
+
     }
 }
