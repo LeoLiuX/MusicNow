@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1059441886290",
+    "project_id": "firebase-musicnow"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059441886290:android:2036bde20258897d",
+        "android_client_info": {
+          "package_name": "com.example.xiao.musicnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059441886290-55u60r670n9hkdf42p0k8ij1r2r981gn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.xiao.musicnow",
+            "certificate_hash": "FD31DD02E42A0A913B808C46997C398CADA96469"
+          }
+        },
+        {
+          "client_id": "1059441886290-cd1gu9ickfassundlua1msikjepmu3u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb428gNmL1QjHkgXA0o0wddA17K9iXlGg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

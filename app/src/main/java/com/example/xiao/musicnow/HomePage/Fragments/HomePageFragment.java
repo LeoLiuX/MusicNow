@@ -1,6 +1,10 @@
 package com.example.xiao.musicnow.HomePage.Fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.support.v4.app.Fragment;
@@ -23,7 +28,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.xiao.musicnow.Controller.AppController;
+import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.HomeActivity;
+import com.example.xiao.musicnow.LoginPage.LoginActivity;
 import com.example.xiao.musicnow.Model.ClickImageView;
 import com.example.xiao.musicnow.Model.myPicture;
 import com.example.xiao.musicnow.R;
@@ -228,16 +235,23 @@ public class HomePageFragment extends Fragment implements OnPageChangeListener{
             @Override
             public void onClick(View view) {
                 Log.e("CLICK", "BTN_5");
-                MyZoneFragment myZoneFragment = new MyZoneFragment();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
-                        .replace(R.id.home_fragment_container, myZoneFragment)
-                        .addToBackStack(HomePageFragment.class.getName())
-                        .commit();
+                if (SPController.getInstance(getActivity()).hasUserLoggedIn()) {
+                    MyZoneFragment myZoneFragment = new MyZoneFragment();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                            .replace(R.id.home_fragment_container, myZoneFragment)
+                            .addToBackStack(HomePageFragment.class.getName())
+                            .commit();
+
+                } else {
+                    HomeActivity.showLoginAlert();
+                }
             }
         });
     }
+
+
 
     public class ImageAdapter extends PagerAdapter{
         @Override

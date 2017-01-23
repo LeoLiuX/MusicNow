@@ -18,18 +18,25 @@
             android:id="@+id/nav_pic"
             android:icon="@drawable/nav_pic"
             android:title="@string/drawer_pic" />
+
         <item
-            android:id="@+id/nav_offline"
-            android:icon="@drawable/nav_offline"
-            android:title="@string/drawer_offline"/>
-        <item
-            android:id="@+id/nav_my_zone"
-            android:icon="@drawable/nav_my_zone"
-            android:title="@string/drawer_myZone"/>
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/nav_logout"
-            android:title="@string/drawer_logout"/>
+            android:title="Member">
+            <menu>
+                <item
+                    android:id="@+id/nav_offline"
+                    android:icon="@drawable/nav_offline"
+                    android:title="@string/drawer_offline"/>
+                <item
+                    android:id="@+id/nav_my_zone"
+                    android:icon="@drawable/nav_my_zone"
+                    android:title="@string/drawer_myZone"/>
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/nav_logout"
+                    android:title="@string/drawer_logout"/>
+            </menu>
+        </item>
+
     </group>
 
 </menu>

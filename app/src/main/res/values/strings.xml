@@ -26,8 +26,8 @@
     <string name="button_reset">Want to Reset Password?</string>
 
     <!--Facebook Login -->
-    <string name="facebook_app_id">1396998250339202</string>
-    <string name="fb_login_protocol_scheme">fb1396998250339202</string>
+    <string name="facebook_app_id">196153947527081</string>
+    <string name="fb_login_protocol_scheme">fb196153947527081</string>
 
     <!--Reset Fragment -->
     <string name="title_reset">Reset Password</string>

@@ -1,5 +1,6 @@
 package com.example.xiao.musicnow.HomePage;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,13 +20,16 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.Fragments.HomePageFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.MusicFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.MyZoneFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.OfflineFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.PictureFragment;
 import com.example.xiao.musicnow.HomePage.Fragments.VideoFragment;
+import com.example.xiao.musicnow.LoginPage.LoginActivity;
 import com.example.xiao.musicnow.R;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.api.Api;
 
 public class HomeActivity extends AppCompatActivity
@@ -33,7 +37,7 @@ public class HomeActivity extends AppCompatActivity
 
     private static ProgressDialog pDialog;
     private static ProgressDialog mDownloadingDialog;
-
+    private static AlertDialog.Builder loginAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,16 @@ public class HomeActivity extends AppCompatActivity
         mDownloadingDialog.setIndeterminate(true);
         mDownloadingDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDownloadingDialog.setCancelable(false);
+
+        loginAlert = new AlertDialog.Builder(HomeActivity.this).setTitle("Please Login First").setIcon(
+                android.R.drawable.ic_dialog_info).setPositiveButton("Login", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent loginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
+        }).setNegativeButton("Cancel", null);
 
         initDrawer();
         initContainer();
@@ -145,7 +159,9 @@ public class HomeActivity extends AppCompatActivity
             homeFragment = new MyZoneFragment();
             title = "My Zone";
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User: " + SPController.getInstance(this).getMobile() + " Log out", Toast.LENGTH_SHORT).show();
+            LoginManager.getInstance().logOut();
+            SPController.getInstance(this).clearSharedPreference();
         }
         if(homeFragment != null)
         {
@@ -185,5 +201,9 @@ public class HomeActivity extends AppCompatActivity
 
     public static ProgressDialog getmDownloadingDialog(){
         return mDownloadingDialog;
+    }
+
+    public static void showLoginAlert(){
+        loginAlert.show();
     }
 }

@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.Fragments.video_favorite;
 import com.example.xiao.musicnow.HomePage.Fragments.video_main;
+import com.example.xiao.musicnow.HomePage.HomeActivity;
 import com.example.xiao.musicnow.Model.myVideo;
 import com.example.xiao.musicnow.R;
 
@@ -54,17 +56,22 @@ public class VideoAdapter extends  RecyclerView.Adapter<VideoHolder> implements 
         holder.mFavoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (videos.get(position).getFavorite()){
-                    videos.get(position).removeFavorited();
-                    holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
-                    video_favorite.refreshFavorite();
-                    video_main.refreshFavorite();
+                if (!SPController.getInstance(mContext).hasUserLoggedIn()){
+                    HomeActivity.showLoginAlert();
                 }
                 else {
-                    videos.get(position).setFavorited();
-                    holder.mFavoriteBtn.setImageResource(R.drawable.favorite_on);
-                    video_favorite.refreshFavorite();
-                    video_main.refreshFavorite();
+                    if (videos.get(position).getFavorite()){
+                        videos.get(position).removeFavorited();
+                        holder.mFavoriteBtn.setImageResource(R.drawable.favorite_off);
+                        video_favorite.refreshFavorite();
+                        video_main.refreshFavorite();
+                    }
+                    else {
+                        videos.get(position).setFavorited();
+                        holder.mFavoriteBtn.setImageResource(R.drawable.favorite_on);
+                        video_favorite.refreshFavorite();
+                        video_main.refreshFavorite();
+                    }
                 }
             }
         });

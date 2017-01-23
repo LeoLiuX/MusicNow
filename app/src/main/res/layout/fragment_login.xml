@@ -88,15 +88,27 @@
         app:srcCompat="@drawable/line"
         android:layout_marginTop="14dp" />
 
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/button_fb_sign_in"
+        android:text="Connect with Facebook"
+        android:textColor="@color/icons"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:backgroundTint="#565fa0"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/imageView3"/>
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.common.SignInButton
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:id="@+id/btn_sign_in"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/button_fb_sign_in"/>
 
 
 </RelativeLayout>
