@@ -6,7 +6,7 @@
     android:background="@color/divider">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_picture_favorite"
+        android:id="@+id/recyclerview_music_favorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"/>
@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:paddingTop="100dp"
         android:background="@color/cardview_light_background"
-        android:id="@+id/picture_favorite_notLogin">
+        android:id="@+id/music_favorite_notLogin">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:id="@+id/picture_favorite_btn_login"
+            android:id="@+id/music_favorite_btn_login"
             android:background="@color/colorAccent"
             android:text="Login"/>
     </LinearLayout>
