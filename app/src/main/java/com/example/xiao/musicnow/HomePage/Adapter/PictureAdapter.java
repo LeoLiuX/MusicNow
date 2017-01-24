@@ -45,7 +45,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureHolder> implemen
     @Override
     public void onBindViewHolder(final PictureHolder holder, final int position) {
         holder.title.setText(picture.get(position).getTitle());
-        holder.desc.setText(picture.get(position).getDescription());
+        holder.desc.setText(picture.get(position).getDescription()+"...");
         holder.pic.setImageBitmap(picture.get(position).getImage());
         holder.itemView.setTag(position);
         if(!picture.get(position).getFavorite()) {
