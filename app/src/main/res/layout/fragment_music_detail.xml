@@ -6,47 +6,118 @@
     android:padding="10dp"
     android:weightSum="1">
 
-    <TextView
-        android:text="Title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:id="@+id/music_detail_title"
-        android:textAlignment="center"
-        android:textStyle="normal|bold"
-        android:textColor="@color/primary_text"
-        android:textSize="28sp" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/music_detail_image"
-            android:background="@color/black_overlay"/>
-        <com.example.xiao.musicnow.Model.ClickImageView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_play"
-            android:layout_gravity="center"
-            android:id="@+id/music_detail_play"/>
-    </FrameLayout>
+            android:orientation="vertical" >
 
-    <VideoView
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="fill"
-        android:id="@+id/music_detail_video" />
+            <TextView
+                android:text="Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:id="@+id/music_detail_title"
+                android:textAlignment="center"
+                android:textStyle="normal|bold"
+                android:textColor="@color/primary_text"
+                android:textSize="28sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/music_detail_desc"
-        android:textSize="18sp"
-        android:textAllCaps="false" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/music_detail_image"
+                    android:background="@color/black_overlay"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/songCurrentDurationLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBar" />
+
+                <TextView
+                    android:id="@+id/songTotalDurationLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <com.example.xiao.musicnow.Model.ClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/music_play_icon"
+                    android:id="@+id/music_detail_play"
+                    android:layout_weight="1" />
+                <com.example.xiao.musicnow.Model.ClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/music_pause_icon"
+                    android:id="@+id/music_detail_pause"
+                    android:layout_weight="1" />
+                <com.example.xiao.musicnow.Model.ClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/music_stop_icon"
+                    android:id="@+id/music_detail_stop"
+                    android:layout_weight="1" />
+                <com.example.xiao.musicnow.Model.ClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/download"
+                    android:id="@+id/music_detail_download"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/music_detail_desc"
+                android:textSize="18sp"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -48,6 +48,7 @@ public class music_main extends Fragment {
     private RecyclerView recyclerView_new, recyclerView_top, recyclerView_comp;
     private static MusicAdapter adapter_new, adapter_top, adapter_comp;
     private View view;
+    int show = 0;
 
     public static void refreshFavorite(){
         adapter_new.notifyData(music_new);
@@ -79,7 +80,10 @@ public class music_main extends Fragment {
         // new release
         recyclerView_new = (RecyclerView) view.findViewById(R.id.recyclerview_music_new_release);
         recyclerView_new.setHasFixedSize(false);
-        recyclerView_new.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
+        LinearLayoutManager llm0 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true);
+        llm0.setStackFromEnd(true);
+        llm0.setReverseLayout(true);
+        recyclerView_new.setLayoutManager(llm0);
         adapter_new = new MusicAdapter(getActivity(), music_new);
         adapter_new.setOnItemClickListener(new MusicAdapter.OnRecyclerViewItemClickListener() {
             @Override
@@ -100,7 +104,10 @@ public class music_main extends Fragment {
         // top played
         recyclerView_top = (RecyclerView) view.findViewById(R.id.recyclerview_music_top_played);
         recyclerView_top.setHasFixedSize(false);
-        recyclerView_top.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
+        LinearLayoutManager llm1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true);
+        llm1.setStackFromEnd(true);
+        llm1.setReverseLayout(true);
+        recyclerView_top.setLayoutManager(llm1);
         adapter_top = new MusicAdapter(getActivity(), music_top);
         adapter_top.setOnItemClickListener(new MusicAdapter.OnRecyclerViewItemClickListener() {
             @Override
@@ -121,7 +128,10 @@ public class music_main extends Fragment {
         // top compilation
         recyclerView_comp = (RecyclerView) view.findViewById(R.id.recyclerview_music_top_comp);
         recyclerView_comp.setHasFixedSize(false);
-        recyclerView_comp.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
+        LinearLayoutManager llm2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true);
+        llm2.setStackFromEnd(true);
+        llm2.setReverseLayout(true);
+        recyclerView_comp.setLayoutManager(llm2);
         adapter_comp = new MusicAdapter(getActivity(), music_comp);
         adapter_comp.setOnItemClickListener(new MusicAdapter.OnRecyclerViewItemClickListener() {
             @Override
@@ -143,7 +153,7 @@ public class music_main extends Fragment {
     }
 
     private void objRequestMethod(String  url, final int source) {
-        HomeActivity.showPDialog();
+        show();
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -232,16 +242,30 @@ public class music_main extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                HomeActivity.disPDialog();
+                hide();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "ERROR" + error.getMessage());
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                HomeActivity.disPDialog();
+                hide();
             }
         });
         AppController.getInstance().addToRequestQueue(req, TAG);
+    }
+
+    private synchronized void show() {
+        if(show == 0) {
+            HomeActivity.showPDialog();
+        }
+        show++;
+    }
+
+    private synchronized void hide() {
+        show--;
+        if(show == 0) {
+            HomeActivity.disPDialog();
+        }
     }
 }

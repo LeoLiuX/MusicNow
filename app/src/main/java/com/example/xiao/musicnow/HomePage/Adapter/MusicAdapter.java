@@ -44,7 +44,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicHolder> implements V
     @Override
     public void onBindViewHolder(final MusicHolder holder, final int position) {
         holder.name.setText(music.get(position).getMusicName());
-        holder.desc.setText(music.get(position).getMusicDesc());
+        holder.desc.setText(music.get(position).getMusicDesc()+"...");
         holder.image.setImageBitmap(music.get(position).getMusicImage());
         holder.itemView.setTag(position);
         if(!music.get(position).getFavorited()){
