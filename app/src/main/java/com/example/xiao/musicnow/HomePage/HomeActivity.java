@@ -223,8 +223,9 @@ public class HomeActivity extends AppCompatActivity
 
     public static void showPDialog(){
         if (!pDialog.isShowing()){
-            pDialog.setContentView(R.layout.progress_loading);
             pDialog.show();
+            pDialog.setContentView(R.layout.progress_loading);
+
         }
     }
     public static void disPDialog(){

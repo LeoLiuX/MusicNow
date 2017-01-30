@@ -61,7 +61,7 @@ public class offline_picture extends Fragment {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                         .replace(R.id.home_fragment_container, detail)
-                        .addToBackStack(picture_main.class.getName())
+                        .addToBackStack(offline_picture.class.getName())
                         .commit();
             }
         });

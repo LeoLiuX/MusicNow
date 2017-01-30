@@ -53,10 +53,17 @@ public class offline_music extends Fragment {
         adapter.setOnItemClickListener(new MusicFavAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                File file = new File("/sdcard/" + downloadList.get(position).getMusicName());
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(file), "music/*");
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putInt("MUSIC_ID", downloadList.get(position).getMusicId());
+                Fragment detail = new music_detail();
+                detail.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.home_fragment_container, detail)
+                        .addToBackStack(offline_music.class.getName())
+                        .commit();
+
             }
         });
         recyclerView.setAdapter(adapter);
