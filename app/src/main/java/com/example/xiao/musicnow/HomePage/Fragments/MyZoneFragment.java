@@ -29,7 +29,7 @@ public class MyZoneFragment extends Fragment {
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment detail = new myzone_music();
+                Fragment detail = new music_favorite();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
