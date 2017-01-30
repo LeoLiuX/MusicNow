@@ -43,7 +43,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:id="@+id/timezone">
 
                 <TextView
                     android:id="@+id/songCurrentDurationLabel"
@@ -76,7 +78,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
-
+                <com.example.xiao.musicnow.Model.ClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/music_detail_backward"
+                    android:id="@+id/music_detail_backward"
+                    android:layout_weight="1" />
                 <com.example.xiao.musicnow.Model.ClickImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,8 +96,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/music_pause_icon"
-                    android:id="@+id/music_detail_pause"
+                    android:src="@drawable/music_detail_forward"
+                    android:id="@+id/music_detail_forward"
                     android:layout_weight="1" />
                 <com.example.xiao.musicnow.Model.ClickImageView
                     android:layout_width="wrap_content"

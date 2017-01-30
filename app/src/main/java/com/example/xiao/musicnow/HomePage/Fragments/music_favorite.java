@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.example.xiao.musicnow.Controller.SPController;
 import com.example.xiao.musicnow.HomePage.Adapter.MusicAdapter;
+import com.example.xiao.musicnow.HomePage.Adapter.MusicFavAdapter;
 import com.example.xiao.musicnow.LoginPage.LoginActivity;
 import com.example.xiao.musicnow.Model.myMusic;
 import com.example.xiao.musicnow.R;
@@ -27,7 +28,7 @@ public class music_favorite extends Fragment {
     private static ArrayList<myMusic> favoriteList = new ArrayList<>();
     private View view;
     private RecyclerView mRecyclerView;
-    private static MusicAdapter adapter;
+    private static MusicFavAdapter adapter;
 
     public static void refreshFavorite(){
         setFavoriteList();
@@ -66,8 +67,8 @@ public class music_favorite extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_music_favorite);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MusicAdapter(getActivity(), favoriteList);
-        adapter.setOnItemClickListener(new MusicAdapter.OnRecyclerViewItemClickListener() {
+        adapter = new MusicFavAdapter(getActivity(), favoriteList);
+        adapter.setOnItemClickListener(new MusicFavAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();

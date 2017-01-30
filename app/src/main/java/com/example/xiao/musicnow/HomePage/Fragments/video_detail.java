@@ -131,7 +131,7 @@ public class video_detail extends Fragment {
 
     private void downloadVideo() {
         if (video.getDownload()){
-            Toast.makeText(getActivity(), "Picture Already Been Downloaded!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Video Already Been Downloaded!", Toast.LENGTH_SHORT).show();
             return;
         }
         // download image
